@@ -30,7 +30,9 @@ export default async function PostPage({
 
   if (post.livestory && post.livestory.ssc) {
     const content = post.livestory;
-    //fetch the SSC content and render it
+    // fetch the SSC content and render it
+    // ssc field contains the URL to fetch the SSR content
+    // e.g. https://api.livestory.io/content/layout/68ed13f8bdacca39e6385493
     try {
         const ssrResult = await fetch(content.ssc);
         content.ssr = await ssrResult.text();
