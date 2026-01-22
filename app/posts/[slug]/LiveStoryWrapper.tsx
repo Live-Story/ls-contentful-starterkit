@@ -26,7 +26,8 @@ export default function LiveStoryWrapper({ content }: { content: any }) {
     <div
       id={`ls-${content.id}`}
       data-id={content.id}
-      data-lang=""
+      data-lang="" // Add language if needed
+      data-store="STORE_ID" // Add your data-store value if needed
       dangerouslySetInnerHTML={{ __html: content.ssr ? content.ssr : '' }}
     />
   );
