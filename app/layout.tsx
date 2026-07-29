@@ -57,7 +57,7 @@ export default function RootLayout({
 
         <Script
           src="https://assets.livestory.io/dist/livestory-demo.min.js"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
         <section className="min-h-screen">
           <main>{children}</main>

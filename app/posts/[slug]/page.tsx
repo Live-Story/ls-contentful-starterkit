@@ -28,18 +28,20 @@ export default async function PostPage({
   const { isEnabled } = await draftMode();
   const { post, morePosts } = await getPostAndMorePosts(resolvedParams.slug, isEnabled);
 
-  if (post.livestory && post.livestory.ssc) {
-    const content = post.livestory;
-    // fetch the SSC content and render it
-    // ssc field contains the URL to fetch the SSR content
-    // e.g. https://api.livestory.io/content/layout/68ed13f8bdacca39e6385493
-    try {
-        const ssrResult = await fetch(content.ssc);
-        content.ssr = await ssrResult.text();
-        console.log("LiveStory content enriched with SSR");
-    } catch (error) {
-        console.error("Error fetching LiveStory SSR content:", error);
-    } 
+  if (post.livestory) {
+    // fetch the SSR content
+    const type = post.livestory.type === 'wall' ? 'layout' : 'destination'; // 'layout' of 'destination'
+
+    const ssrURL = `https://api.livestory.io/content/${type}/${post.livestory.id}?lang_code=en_US`; // you can add optionally &store_code=xxxx
+    // Check the full API reference here: https://livestory.io/documentation/articles/enhanced-client-side-integration
+
+    const response = await fetch(ssrURL);
+
+    if (response.ok) {
+      post.livestory.ssr = await response.text();
+    }
+    
+    console.log("LiveStory content enriched with SSR");
   }
 
   return (

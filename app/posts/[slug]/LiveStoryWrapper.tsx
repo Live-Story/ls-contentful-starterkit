@@ -11,7 +11,7 @@ declare global {
 export default function LiveStoryWrapper({ content }: { content: any }) {
   
   /*
-  * Uncomment this if you don't use ls-client-sdk package.
+  * Uncomment this block if you don't use ls-client-sdk package and create Live Story <div> by yourself
 
   const loadedRef = useRef(false);
 
@@ -37,8 +37,8 @@ export default function LiveStoryWrapper({ content }: { content: any }) {
     * or you can create the below <div> by yourself. 
     * If you create below <div>, be sure su uncomment useEffect hook where you call new window.LiveStory(...) script
     * 
-    *
-
+    * keep suppressHydrationWarning before Live Story library takes care of the component hydration
+  
     <div
       id={`ls-${content.id}`}
       data-id={content.id}
