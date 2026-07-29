@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { EXAMPLE_PATH, CMS_NAME } from "@/lib/constants";
+import Script from "next/script";
 
 export const metadata = {
   title: `Next.js and ${CMS_NAME} Example`,
@@ -48,11 +49,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
-      <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script type="text/javascript" src="https://assets.livestory.io/dist/livestory-demo.min.js"></script>
-      </head>
       <body>
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+          strategy="beforeInteractive"
+        />
+
+        <Script
+          src="https://assets.livestory.io/dist/livestory-demo.min.js"
+          strategy="afterInteractive"
+        />
         <section className="min-h-screen">
           <main>{children}</main>
           <Footer />
