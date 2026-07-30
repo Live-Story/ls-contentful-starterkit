@@ -29,11 +29,12 @@ export default async function PostPage({
   const { post, morePosts } = await getPostAndMorePosts(resolvedParams.slug, isEnabled);
 
   if (post.livestory) {
-    // fetch the SSR content
-    const type = post.livestory.type === 'wall' ? 'layout' : 'destination'; // 'layout' of 'destination'
-
-    const ssrURL = `https://api.livestory.io/content/${type}/${post.livestory.id}?lang_code=en_US`; // you can add optionally &store_code=xxxx
+    // Fetch SSR
+    // You have to call our API to get SSR
     // Check the full API reference here: https://livestory.io/documentation/articles/enhanced-client-side-integration
+    
+    const type = post.livestory.type === 'wall' ? 'layout' : 'destination'; // 'layout' or 'destination'
+    const ssrURL = `https://api.livestory.io/content/${type}/${post.livestory.id}?lang_code=en_US`; // you can add optionally: &store_code=xxxx
 
     const response = await fetch(ssrURL);
 
